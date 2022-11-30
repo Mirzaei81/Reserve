@@ -27,6 +27,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: User Pass
-        run:|
+        run: |
           echo ${{ secrets.IUT_PASS }}\
            echo ${{ secrets.IUT_UNAME}}
