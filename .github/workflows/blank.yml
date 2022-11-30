@@ -24,9 +24,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: chmod
+        run:  chmod +x ./edgemsedgedriver
 
       # Runs a single command using the runners shell
-      - name: User Pass
+      - name: Main
         run: |
-          echo ${{ secrets.IUT_PASS }}\
-           echo ${{ secrets.IUT_UNAME}}
+          pip install -r requirement.txt \
+            python3 Main.py "${{ secrets.IUT_UNAME}}" "${{secrets.IUT_PASS}}" 
+
