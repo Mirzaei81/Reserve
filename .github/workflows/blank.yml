@@ -34,7 +34,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python3 pip install selenuim,request
+          pip install selenuim,request
 
       - name: Main
         run: |
