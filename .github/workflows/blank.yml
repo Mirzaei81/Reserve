@@ -32,7 +32,7 @@ jobs:
       - name: chmod
         run: chmod +x chromedriver
       - name: chrome
-        run: sudo apt-get install -y chromium-browser
+        run: sudo apt-get install -y chromium-browser 
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
