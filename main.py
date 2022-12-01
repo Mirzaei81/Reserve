@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -29,7 +30,10 @@ finally:
     elem.send_keys(Keys.RETURN)
 wait = WebDriverWait(driver, 5)
 desired_url = "https://dining.iut.ac.ir/#!/UserIndex"
-wait.until(lambda driver: driver.current_url == desired_url)
+try:
+    wait.until(lambda driver: driver.current_url == desired_url)
+except TimeoutException:
+    print(driver.page_source)
 coockies = driver.get_cookies();
 s = requests.Session()
 for coockie in coockies:
