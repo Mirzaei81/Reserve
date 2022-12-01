@@ -47,5 +47,5 @@ jobs:
 
       - name: Main
         run: |
-          python3 Main.py ${{ secrets.IUT_UNAME}} ${{secrets.IUT_PASS}}
+          python3 main.py ${{ secrets.IUT_UNAME}} ${{secrets.IUT_PASS}}
 
