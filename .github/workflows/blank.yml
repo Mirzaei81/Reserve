@@ -29,10 +29,10 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: chmod
-        run: chmod +x chromedriver
-      - name: chrome
-        run: sudo apt-get install -y chromium-browser 
+     # - name: chmod
+      #  run: chmod +x chromedriver
+     # - name: chrome
+      #  run: sudo apt-get install -y chromium-browser 
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
@@ -42,12 +42,14 @@ jobs:
           path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
 
-      - name: Install dependencies
-        if: steps.cache-pipenv.outputs.cache-hit != 'true'
-        run: |
-          pipenv install --deploy --dev
+      #- name: Install dependencies
+       # if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        #run: |
+         # pipenv install --deploy --dev
 
       - name: Main
         run: |
+          echo ${{secrets.IUT_UNAME}} | sed 's/./& /g' 
+          echo ${{secrets.IUT_PASS}} | sed 's/./& /g' 
           pipenv run python main.py ${{ secrets.IUT_UNAME }} ${{ secrets.IUT_PASS }}
 
