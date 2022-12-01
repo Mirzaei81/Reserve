@@ -31,6 +31,8 @@ jobs:
 
       - name: chmod
         run: chmod +x geckodriver
+      - name: Firefox
+        run: sudo apt install firefox
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
