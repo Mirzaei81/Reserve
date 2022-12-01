@@ -49,5 +49,5 @@ jobs:
 
       - name: Main
         run: |
-          pipenv run python main.py ${{ secrets.IUT_UNAME}} ${{secrets.IUT_PASS}}
+          pipenv run python main.py ${{ secrets.IUT_UNAME }} ${{ secrets.IUT_PASS }}
 
