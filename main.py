@@ -9,10 +9,9 @@ import sys
 
 user = sys.argv[1]
 password  = sys.argv[2]
-opt = webdriver.EdgeOptions()
-opt.add_argument("headless")
-opt.add_argument("disable-gpu")
-driver = webdriver.Edge(executable_path="./msedgedriver",options=opt,)
+opt = webdriver.FirefoxOptions()
+opt.headless = True
+driver = webdriver.Firefox(executable_path="./geckodriver",options=opt,)
 url = "https://dining.iut.ac.ir/"
 driver.get(url)
 xpath = "/html/body/div/div/div[2]/div/div/div[2]/div/form/div/a"
