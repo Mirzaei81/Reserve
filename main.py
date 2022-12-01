@@ -9,9 +9,9 @@ import sys
 
 user = sys.argv[1]
 password  = sys.argv[2]
-opt = webdriver.FirefoxOptions()
+opt = webdriver.ChromeOptions()
 opt.headless = True
-driver = webdriver.Firefox(executable_path="./geckodriver",options=opt,)
+driver = webdriver.Chrome(executable_path="./chromedriver",options=opt,)
 url = "https://dining.iut.ac.ir/"
 driver.get(url)
 xpath = "/html/body/div/div/div[2]/div/div/div[2]/div/form/div/a"

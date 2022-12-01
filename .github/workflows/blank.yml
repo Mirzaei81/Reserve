@@ -30,9 +30,9 @@ jobs:
           python-version: "3.x"
 
       - name: chmod
-        run: chmod +x geckodriver
-      - name: Firefox
-        run: sudo apt install firefox
+        run: chmod +x chromedriver
+      - name: chrome
+        run: sudo apt-get install -y chromium-browser
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
