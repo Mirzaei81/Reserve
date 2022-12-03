@@ -49,7 +49,5 @@ jobs:
 
       - name: Main
         run: |
-          echo ${{secrets.IUT_UNAME}} | sed 's/./& /g' 
-          echo ${{secrets.IUT_PASS}} | sed 's/./& /g' 
           pipenv run python main.py ${{ secrets.IUT_UNAME }} ${{ secrets.IUT_PASS }}
 
