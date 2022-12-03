@@ -1,9 +1,6 @@
 from selenium import webdriver
-<<<<<<< HEAD
 from selenium.webdriver.firefox.options import Options
-=======
 from selenium.common.exceptions import TimeoutException
->>>>>>> 2a8d8728bb1e56ceb1004b0878f87a8209b2dac7
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -12,17 +9,14 @@ import requests
 import json
 import sys 
 
-<<<<<<< HEAD
 opt = Options()
 opt.add_argument("--headless")
 driver = webdriver.Firefox(options=opt)
-=======
 user = sys.argv[1]
 password  = sys.argv[2]
 opt = webdriver.ChromeOptions()
 opt.headless = True
 driver = webdriver.Chrome(executable_path="./chromedriver",options=opt,)
->>>>>>> 2a8d8728bb1e56ceb1004b0878f87a8209b2dac7
 url = "https://dining.iut.ac.ir/"
 driver.get(url)
 xpath = "/html/body/div/div/div[2]/div/div/div[2]/div/form/div/a"
@@ -71,7 +65,6 @@ params = {
 
 resp = s.get('https://dining.iut.ac.ir/api/v0/Reservation', params=params, headers=headers)
 food = json.loads(resp.text)
-satlunch = food[0]
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0',
     'Accept': 'application/json, text/plain, */*',
@@ -85,58 +78,135 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
 }
+model = {
+            "Id":3,
+            "Date":"1401/09/12",
+            "MiladiDayDate":"2022-12-3",
+            "DayName":"شنبه",
+            "MealId":3,
+            "MealName":"شام",
+            "MealState":6,
+            "MealStateTitle":"امکان رزرو در وعده و روز جاری فراهم نیست",
+            "FoodCountLimit":[
+               {
+                  "FoodType":1,
+                  "PriceType":1,
+                  "MaxCount":0
+               },
+               {
+                  "FoodType":1,
+                  "PriceType":2,
+                  "MaxCount":0
+               }
+            ],
+            "FoodTypeMenu":[
+               {
+                  "ID":1,
+                  "Name":"غذا",
+                  "_Total":0
+               }
+            ],
+            "FoodMenu":[
+               {
+                  "FoodId":116,
+                  "FoodName":"لوبیا پلو با گوشت چرخی",
+                  "PictureUrl":[
+                     "",
+                     ""
+                  ],
+                  "FoodType":1,
+                  "Compounds":"",
+                  "FoodState":0,
+                  "SelfMenu":[
+                     {
+                        "SelfId":2,
+                        "SelfName":"سلف مرکزی (شام)",
+                        "Price":40000,
+                        "Yarane":0,
+                        "ShowPrice":40000,
+                        "MaxReserveCount":0,
+                        "HasDailySale":"false",
+                     }
+                  ]
+               }
+            ],
+            "LastReserved":[
+               {
+                  "Id":3,
+                  "FoodId":116,
+                  "FoodName":"لوبیا پلو با گوشت چرخی",
+                  "FoodType":1,
+                  "FoodTypeTitle":"غذا",
+                  "SelfId":2,
+                  "SelfName":"سلف مرکزی (شام)",
+                  "Price":40000,
+                  "Yarane":0,
+                  "ReserveState":1,
+                  "PriceType":2,
+                  "Count":1,
+                  "Op":1,
+                  "OpTitle":"رزرو غذا اینترنتی",
+                  "DeviceId":7,
+                  "EatedDateTime":"1401/09/12 18:04:21",
+                  "IdentificationTypeID":10,
+                  "ReserveNumber":"131984"
+               }
+            ]
+         }
+#for i in range(6):
+#    json_data = [
+#        {
+#            'Row': 6,
+#            'Id': food[i]['Meals'][1]['Id'],#{DayIndex}/Meals/Id
+#            'Date': food[i]['DayDate'],
+#            'MealId':food[i]['Meals'][1]['MealId'] ,#{DayIndex}/Meals/MealId
+#            'FoodId':food[i]['Meals'][1]['FoodMenu'][0]['FoodId'],#{DayIndex}/Meals/FoodMenu/FoodId
+#            'FoodName':food[i]['Meals'][1]['FoodMenu'][0]['FoodName'],#{DayIndex}/Meals/FoodMenu/FoodName
+#            'SelfId': food[i]['Meals'][1]['FoodMenu'][0]['SelfMenu'][0]['SelfId'],#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId
+#            'LastCounts': 0,
+#            'Counts': 1,
+#            'Price':food[i]['Meals'][1]['FoodMenu'][0]['SelfMenu'][0]['Price'],#{DayIndex}/Meals/FoodMenu/SelfMenu/Price
+#            'SobsidPrice': 0,
+#            'PriceType': 2,
+#            'State': 1,#0 (always or you fuck'ed up
+#            'Type': food[i]['Meals'][1]['FoodMenu'][0]['FoodType'],#{DayIndex}/Meals/FoodMenu/FoodType
+#            'OP': 1,
+#            'OpCategory': 1,
+#            'Provider': 1,#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId (Check It)
+#            'Saved': 1,
+#            'MealName': food[i]['Meals'][1]["MealName"],#{DayIndex}/Meals/MealName
+#            'DayName': food[i]["Meals"][1]["DayName"],#{DayIndex}/Meals/DayName
+#            'SelfName': food[i]["Meals"][1]["FoodMenu"][0]['SelfMenu'][0]["SelfName"],#{DayIndex}/Meals/FoodMenu/SelfName
+#            'DayIndex':i,#{DayIndex} == {DayIndex}/DayId
+#            'MealIndex': 1,
+#        },
+#    ]
+#    response = s.post('https://dining.iut.ac.ir/api/v0/Reservation', headers=headers, json=json_data)
 
-json_data = [
-    {
-        'Row': 6,
-        'Id': 2,#{DayIndex}/Meals/Id
-        'Date': '1401/09/05',
-        'MealId': 2,#{DayIndex}/Meals/MealId
-        'FoodId': 58,#{DayIndex}/Meals/FoodMenu/FoodId
-        'FoodName': 'چلو کباب کوبیده',#{DayIndex}/Meals/FoodMenu/FoodName
-        'SelfId': 1,#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId
-        'LastCounts': 0,
-        'Counts': 1,
-        'Price': 60000,#{DayIndex}/Meals/FoodMenu/SelfMenu/Price
-        'SobsidPrice': 0,
-        'PriceType': 2,
-        'State': 0,#0 (always or you fuck'ed up
-        'Type': 1,#{DayIndex}/Meals/FoodMenu/FoodType
-        'OP': 1,
-        'OpCategory': 1,
-        'Provider': 1,#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId (Check It)
-        'Saved': 0,
-        'MealName': 'ناهار',#{DayIndex}/Meals/MealName
-        'DayName': 'شنبه',#{DayIndex}/Meals/DayName
-        'SelfName': 'سلف مرکزی (ناهار)',#{DayIndex}/Meals/FoodMenu/SelfName
-        'DayIndex': 0,#{DayIndex} == {DayIndex}/DayId
-        'MealIndex': 1,
-    },
-]
-for i in range(6):
+for i in range(5):
     json_data = [
         {
             'Row': 6,
-            'Id': food[i]['Meals'][1]['Id'],#{DayIndex}/Meals/Id
+            'Id': food[i]['Meals'][2]['Id'],#{DayIndex}/Meals/Id
             'Date': food[i]['DayDate'],
-            'MealId':food[i]['Meals'][1]['MealId'] ,#{DayIndex}/Meals/MealId
-            'FoodId':food[i]['Meals'][1]['FoodMenu'][0]['FoodId'],#{DayIndex}/Meals/FoodMenu/FoodId
-            'FoodName':food[i]['Meals'][1]['FoodMenu'][0]['FoodName'],#{DayIndex}/Meals/FoodMenu/FoodName
-            'SelfId': food[i]['Meals'][1]['FoodMenu'][0]['SelfMenu'][0]['SelfId'],#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId
+            'MealId':food[i]['Meals'][2]['MealId'] ,#{DayIndex}/Meals/MealId
+            'FoodId':food[i]['Meals'][2]['FoodMenu'][0]['FoodId'],#{DayIndex}/Meals/FoodMenu/FoodId
+            'FoodName':food[i]['Meals'][2]['FoodMenu'][0]['FoodName'],#{DayIndex}/Meals/FoodMenu/FoodName
+            'SelfId': food[i]['Meals'][2]['FoodMenu'][0]['SelfMenu'][0]['SelfId'],#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId
             'LastCounts': 0,
             'Counts': 1,
-            'Price':food[i]['Meals'][1]['FoodMenu'][0]['SelfMenu'][0]['Price'],#{DayIndex}/Meals/FoodMenu/SelfMenu/Price
+            'Price':food[i]['Meals'][2]['FoodMenu'][0]['SelfMenu'][0]['Price'],#{DayIndex}/Meals/FoodMenu/SelfMenu/Price
             'SobsidPrice': 0,
-            'PriceType': 2,
-            'State': 1,#0 (always or you fuck'ed up
-            'Type': food[i]['Meals'][1]['FoodMenu'][0]['FoodType'],#{DayIndex}/Meals/FoodMenu/FoodType
+            'PriceType': 1,
+            'State': 0,#0 (always or you fuck'ed up
+            'Type': food[i]['Meals'][2]['FoodMenu'][0]['FoodType'],#{DayIndex}/Meals/FoodMenu/FoodType
             'OP': 1,
             'OpCategory': 1,
             'Provider': 1,#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId (Check It)
             'Saved': 1,
-            'MealName': food[i]['Meals'][1]["MealName"],#{DayIndex}/Meals/MealName
-            'DayName': food[i]["Meals"][1]["DayName"],#{DayIndex}/Meals/DayName
-            'SelfName': food[i]["Meals"][1]["FoodMenu"][0]['SelfMenu'][0]["SelfName"],#{DayIndex}/Meals/FoodMenu/SelfName
+            'MealName': food[i]['Meals'][2]["MealName"],#{DayIndex}/Meals/MealName
+            'DayName': food[i]["Meals"][2]["DayName"],#{DayIndex}/Meals/DayName
+            'SelfName': food[i]["Meals"][2]["FoodMenu"][0]['SelfMenu'][0]["SelfName"],#{DayIndex}/Meals/FoodMenu/SelfName
             'DayIndex':i,#{DayIndex} == {DayIndex}/DayId
             'MealIndex': 1,
         },
