@@ -1,15 +1,28 @@
 from selenium import webdriver
+<<<<<<< HEAD
 from selenium.webdriver.firefox.options import Options
+=======
+from selenium.common.exceptions import TimeoutException
+>>>>>>> 2a8d8728bb1e56ceb1004b0878f87a8209b2dac7
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests
 import json
+import sys 
 
+<<<<<<< HEAD
 opt = Options()
 opt.add_argument("--headless")
 driver = webdriver.Firefox(options=opt)
+=======
+user = sys.argv[1]
+password  = sys.argv[2]
+opt = webdriver.ChromeOptions()
+opt.headless = True
+driver = webdriver.Chrome(executable_path="./chromedriver",options=opt,)
+>>>>>>> 2a8d8728bb1e56ceb1004b0878f87a8209b2dac7
 url = "https://dining.iut.ac.ir/"
 driver.get(url)
 xpath = "/html/body/div/div/div[2]/div/div/div[2]/div/form/div/a"
@@ -21,13 +34,16 @@ finally:
     webpath = driver.find_element(By.XPATH,xpath)
     webpath.click()
     elem = driver.find_element(By.ID,"username")
-    elem.send_keys("40017583")
+    elem.send_keys(user)
     passelm = driver.find_element(By.ID,"password")
-    passelm.send_keys("M1rz@e181")
+    passelm.send_keys(password)
     elem.send_keys(Keys.RETURN)
 wait = WebDriverWait(driver, 5)
 desired_url = "https://dining.iut.ac.ir/#!/UserIndex"
-wait.until(lambda driver: driver.current_url == desired_url)
+try:
+    wait.until(lambda driver: driver.current_url == desired_url)
+except TimeoutException:
+    sys.exit(-1)
 coockies = driver.get_cookies();
 s = requests.Session()
 for coockie in coockies:
@@ -49,7 +65,7 @@ headers = {
 }
 
 params = {
-    'lastdate': '1401/08/28',
+    'lastdate': '1401/09/05',
     'navigation': '7',
 }
 
@@ -128,21 +144,3 @@ for i in range(6):
     response = s.post('https://dining.iut.ac.ir/api/v0/Reservation', headers=headers, json=json_data)
     print(response.json())
 driver.close()
-#    trees = driver.find_elements(By.CLASS_NAME,"treeview")
-#    trees[0].click()
-#    food = "/html/body/div[2]/aside/section/ul/li[2]/ul/li[1]/a"
-#    driver.find_element(By.XPATH,food).click()
-#    nextWeek = "/html/body/div[2]/div/section[2]/div/div/div/div/div/div/div[3]/div[1]/div[2]/div/button[3]"
-#    WebDriverWait(driver, 10).until(
-#        EC.presence_of_element_located((By.XPATH,nextWeek))
-#    )
-#    driver.find_element(By.XPATH,nextWeek).click()
-#    dayX = "/html/body/div[2]/div/section[2]/div/div/div/div/div/div/div[3]/form/div/div/div/ul/li[1]"
-#    WebDriverWait(driver, 10).until(
-#            EC.presence_of_element_located((By.XPATH,dayX))
-#    )
-#    for i in range(1,6):
-#        dayX = f"/html/body/div[2]/div/section[2]/div/div/div/div/div/div/div[3]/form/div/div/div/ul/li[{i}]"
-#        foodSelects = Select(driver.find_elements(By.ID,"selectFood")[1])
-#        foodSelects.select_by_index(1)
-#        driver.find_element(By.XPATH,dayX).click()
