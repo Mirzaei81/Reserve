@@ -1449,3 +1449,19 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: https://
 JavaScript error: resource://gre/actors/PictureInPictureChild.sys.mjs, line 1244: TypeError: shadowRoot is null
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://webauth.iut.ac.ir."
 1669229400391	Marionette	INFO	Stopped listening on port 53172
+1669651505338	geckodriver	INFO	Listening on 127.0.0.1:54130
+1669651508405	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--headless" "--remote-debugging-port" "54131" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Mpc\\AppData\\Local\\Temp\\rust_mozprofileAWhpW1"
+*** You are running in headless mode.
+1669651508917	Marionette	INFO	Marionette enabled
+1669651508922	Marionette	INFO	Listening on port 54141
+Read port: 54141
+WebDriver BiDi listening on ws://127.0.0.1:54131
+1669651509031	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: RenderCompositorSWGL failed mapping default framebuffer, no dt
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Mpc\\AppData\\Local\\Temp\\rust_mozprofileAWhpW1\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:54131/devtools/browser/22a23170-5c2a-470f-8cfb-210379f1b216
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://dining.iut.ac.ir."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://webauth.iut.ac.ir."
+JavaScript error: resource://gre/actors/PictureInPictureChild.sys.mjs, line 1244: TypeError: shadowRoot is null
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://webauth.iut.ac.ir."
+JavaScript error: chrome://global/content/elements/videocontrols.js, line 3325: TypeError: can't access dead object

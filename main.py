@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -6,7 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import requests
 import json
 
-driver = webdriver.Firefox()
+opt = Options()
+opt.add_argument("--headless")
+driver = webdriver.Firefox(options=opt)
 url = "https://dining.iut.ac.ir/"
 driver.get(url)
 xpath = "/html/body/div/div/div[2]/div/div/div[2]/div/form/div/a"
