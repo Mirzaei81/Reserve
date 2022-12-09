@@ -59,7 +59,7 @@ headers = {
 }
 
 params = {
-    'lastdate': '1401/09/05',
+    'lastdate': '1401/09/12',
     'navigation': '7',
 }
 
@@ -78,81 +78,7 @@ headers = {
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
 }
-model = {
-            "Id":3,
-            "Date":"1401/09/12",
-            "MiladiDayDate":"2022-12-3",
-            "DayName":"شنبه",
-            "MealId":3,
-            "MealName":"شام",
-            "MealState":6,
-            "MealStateTitle":"امکان رزرو در وعده و روز جاری فراهم نیست",
-            "FoodCountLimit":[
-               {
-                  "FoodType":1,
-                  "PriceType":1,
-                  "MaxCount":0
-               },
-               {
-                  "FoodType":1,
-                  "PriceType":2,
-                  "MaxCount":0
-               }
-            ],
-            "FoodTypeMenu":[
-               {
-                  "ID":1,
-                  "Name":"غذا",
-                  "_Total":0
-               }
-            ],
-            "FoodMenu":[
-               {
-                  "FoodId":116,
-                  "FoodName":"لوبیا پلو با گوشت چرخی",
-                  "PictureUrl":[
-                     "",
-                     ""
-                  ],
-                  "FoodType":1,
-                  "Compounds":"",
-                  "FoodState":0,
-                  "SelfMenu":[
-                     {
-                        "SelfId":2,
-                        "SelfName":"سلف مرکزی (شام)",
-                        "Price":40000,
-                        "Yarane":0,
-                        "ShowPrice":40000,
-                        "MaxReserveCount":0,
-                        "HasDailySale":"false",
-                     }
-                  ]
-               }
-            ],
-            "LastReserved":[
-               {
-                  "Id":3,
-                  "FoodId":116,
-                  "FoodName":"لوبیا پلو با گوشت چرخی",
-                  "FoodType":1,
-                  "FoodTypeTitle":"غذا",
-                  "SelfId":2,
-                  "SelfName":"سلف مرکزی (شام)",
-                  "Price":40000,
-                  "Yarane":0,
-                  "ReserveState":1,
-                  "PriceType":2,
-                  "Count":1,
-                  "Op":1,
-                  "OpTitle":"رزرو غذا اینترنتی",
-                  "DeviceId":7,
-                  "EatedDateTime":"1401/09/12 18:04:21",
-                  "IdentificationTypeID":10,
-                  "ReserveNumber":"131984"
-               }
-            ]
-         }
+
 for i in range(6):
     json_data = [
         {
