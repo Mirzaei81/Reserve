@@ -79,7 +79,7 @@ headers = {
     'Sec-Fetch-Site': 'same-origin',
 }
 
-for i in range(6):
+for i in range(5):
     json_data = [
         {
             'Row': 6,
