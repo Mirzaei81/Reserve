@@ -109,33 +109,34 @@ for i in range(5):
     ]
     response = s.post('https://dining.iut.ac.ir/api/v0/Reservation', headers=headers, json=json_data)
 
-for i in range(5):
-    json_data = [
-        {
-            'Row': 6,
-            'Id': food[i]['Meals'][2]['Id'],#{DayIndex}/Meals/Id
-            'Date': food[i]['DayDate'],
-            'MealId':food[i]['Meals'][2]['MealId'] ,#{DayIndex}/Meals/MealId
-            'FoodId':food[i]['Meals'][2]['FoodMenu'][0]['FoodId'],#{DayIndex}/Meals/FoodMenu/FoodId
-            'FoodName':food[i]['Meals'][2]['FoodMenu'][0]['FoodName'],#{DayIndex}/Meals/FoodMenu/FoodName
-            'SelfId': food[i]['Meals'][2]['FoodMenu'][0]['SelfMenu'][0]['SelfId'],#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId
-            'LastCounts': 0,
-            'Counts': 1,
-            'Price':food[i]['Meals'][2]['FoodMenu'][0]['SelfMenu'][0]['Price'],#{DayIndex}/Meals/FoodMenu/SelfMenu/Price
-            'SobsidPrice': 0,
-            'PriceType': 1,
-            'State': 0,#0 (always or you fuck'ed up
-            'Type': food[i]['Meals'][2]['FoodMenu'][0]['FoodType'],#{DayIndex}/Meals/FoodMenu/FoodType
-            'OP': 1,
-            'OpCategory': 1,
-            'Provider': 1,#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId (Check It)
-            'Saved': 1,
-            'MealName': food[i]['Meals'][2]["MealName"],#{DayIndex}/Meals/MealName
-            'DayName': food[i]["Meals"][2]["DayName"],#{DayIndex}/Meals/DayName
-            'SelfName': food[i]["Meals"][2]["FoodMenu"][0]['SelfMenu'][0]["SelfName"],#{DayIndex}/Meals/FoodMenu/SelfName
-            'DayIndex':i,#{DayIndex} == {DayIndex}/DayId
-            'MealIndex': 1,
-        },
-    ]
+#for i in range(0):
+ #   json_data = [
+  #      {
+ #           'Row': 6,
+ #           'Id': food[i]['Meals'][2]['Id'],#{DayIndex}/Meals/Id
+  #          'Date': food[i]['DayDate'],
+ #           'MealId':food[i]['Meals'][2]['MealId'] ,#{DayIndex}/Meals/MealId
+  #          'FoodId':food[i]['Meals'][2]['FoodMenu'][0]['FoodId'],#{DayIndex}/Meals/FoodMenu/FoodId
+  #          'FoodName':food[i]['Meals'][2]['FoodMenu'][0]['FoodName'],#{DayIndex}/Meals/FoodMenu/FoodName
+   #         'SelfId': food[i]['Meals'][2]['FoodMenu'][0]['SelfMenu'][0]['SelfId'],#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId
+   #         'LastCounts': 0,
+ #           'Counts': 1,
+  #          'Price':food[i]['Meals'][2]['FoodMenu'][0]['SelfMenu'][0]['Price'],#{DayIndex}/Meals/FoodMenu/SelfMenu/Price
+   #         'SobsidPrice': 0,
+    #        'PriceType': 1,
+   #         'State': 0,#0 (always or you fuck'ed up
+     #       'Type': food[i]['Meals'][2]['FoodMenu'][0]['FoodType'],#{DayIndex}/Meals/FoodMenu/FoodType
+     #       'OP': 1,
+    #        'OpCategory': 1,
+     #       'Provider': 1,#{DayIndex}/Meals/FoodMenu/SelfMenu/SelfId (Check It)
+     #       'Saved': 1,
+     #       'MealName': food[i]['Meals'][2]["MealName"],#{DayIndex}/Meals/MealName
+     #       'DayName': food[i]["Meals"][2]["DayName"],#{DayIndex}/Meals/DayName
+    #        'SelfName': food[i]["Meals"][2]["FoodMenu"][0]['SelfMenu'][0]["SelfName"],#{DayIndex}/Meals/FoodMenu/SelfName
+    #        'DayIndex':i,#{DayIndex} == {DayIndex}/DayId
+ #           'MealIndex': 1,
+ #       },
+  #  ]
     response = s.post('https://dining.iut.ac.ir/api/v0/Reservation', headers=headers, json=json_data)
+    print(response.json())
 driver.close()
