@@ -1,0 +1,30 @@
+{
+  "name": "reserve",
+  "version": "1.0.0",
+  "description": "Auto Reserve food at dining.iut.ac.ir",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc .",
+    "start": "npm run build && node dist/main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirzaei81/Reserve.git"
+  },
+  "keywords": [
+    "dining",
+    "iut",
+    "reserve",
+    "api"
+  ],
+  "author": "MtheBest",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mirzaei81/Reserve/issues"
+  },
+  "homepage": "https://github.com/Mirzaei81/Reserve#readme",
+  "dependencies": {
+    "puppeteer-core": "^20.5.0"
+  }
+}
