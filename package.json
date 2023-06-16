@@ -4,8 +4,8 @@
   "description": "Auto Reserve food at dining.iut.ac.ir",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc .",
-    "start": "npm run build && node dist/main.js",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +25,10 @@
   },
   "homepage": "https://github.com/Mirzaei81/Reserve#readme",
   "dependencies": {
+    "jalali-moment": "^3.3.11",
     "puppeteer-core": "^20.5.0"
+  },
+  "devDependencies": {
+    "@types/puppeteer-core": "^7.0.4"
   }
 }
