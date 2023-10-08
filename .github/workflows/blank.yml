@@ -13,5 +13,6 @@ jobs:
       - uses: actions/setup-node@v3.8.1
         with: 
           node-version: '10.x'
+      - run : dir
       - run: npm install 
       - run: npm run start
