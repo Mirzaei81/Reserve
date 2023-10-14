@@ -23,10 +23,7 @@ const exepath:string = "C:\\Users\\Mpc\\AppData\\Local\\Chromium\\Application\\c
 	let  NameAndValue = coockies.map((cookie:any) => `${cookie.name}=${cookie.value}`).join('; ');
 	await getMenu(NameAndValue);
 	await page.close()
-<<<<<<< HEAD
 })()
-=======
-})() ;
 async function getCoockiesYekta(){
 	const browser = await puppeteer.launch({
 		executablePath: exepath,
@@ -186,9 +183,6 @@ async function getLinks(cookies:string){
 	}
 	console.log("-------------END----------------------")
 }
-
-
->>>>>>> 89d417689ec86da2e1347d9a93b905fec96595d6
 async function getMenu(cookies:string){
 	let day = moment().locale('fa').format("DD");
 	let month = moment().locale('fa').format("MM");
