@@ -12,6 +12,8 @@ jobs:
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
+      with:
+            persist-credentials: false
     - name: Use Node.js
       uses: actions/setup-node@v2
       with: 
@@ -26,19 +28,3 @@ jobs:
 
     - name: Run test
       run: npm run start
-=======
-    steps:
-      
-      - uses: actions/checkout@v2
-        with:
-            persist-credentials: false
-      - uses: actions/setup-node@v3.8.1
-        with: 
-          node-version: '10.x'
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: npm install typescript
-      - run: npm install 
-      - run: npm run start
->>>>>>> 89d417689ec86da2e1347d9a93b905fec96595d6
