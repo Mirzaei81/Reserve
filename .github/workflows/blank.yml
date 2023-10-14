@@ -19,6 +19,7 @@ jobs:
           node-version: '10.x'
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}   
+          ls ${{ github.workspace }}
+      - run: npm install typescript
       - run: npm install 
       - run: npm run start
