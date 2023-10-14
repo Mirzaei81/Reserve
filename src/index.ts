@@ -23,7 +23,7 @@ const exepath:string = "C:\\Users\\Mpc\\AppData\\Local\\Chromium\\Application\\c
 	let  NameAndValue = coockies.map((cookie:any) => `${cookie.name}=${cookie.value}`).join('; ');
 	await getMenu(NameAndValue);
 	await page.close()
-})
+})() ;
 async function getCoockiesYekta(){
 	const browser = await puppeteer.launch({
 		executablePath: exepath,
@@ -366,4 +366,3 @@ async function reserveBreakfest(cookies:string,food:Pokedex[])
 		console.log(await response.text());
 	}
 }
-getCoockiesYekta()
