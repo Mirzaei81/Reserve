@@ -3,16 +3,22 @@ const fetch = require('node-fetch');
 const moment = require('jalali-moment');
 const puppeteer = require("puppeteer-core");
 const cheerio = require('cheerio');
-
+interface IConfig{
+	executablePath:string|null;
+}
 function sleep(ms:number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const exepath:string = "C:\\Users\\Mpc\\AppData\\Local\\Chromium\\Application\\chrome.exe";
+let config= {
+	executablePath:"C:\\Users\\Mpc\\AppData\\Local\\Chromium\\Application\\chrome.exe"
+}as IConfig
+
 (async() => {
-	const browser = await puppeteer.launch({
-		executablePath: exepath,
-	});
+	if(process.env.Dev){
+		config.executablePath = null
+	}
+	const browser = await puppeteer.launch(config);
 	const page= await browser.newPage();
 	await page.goto("https://dining.iut.ac.ir/Cas/Login/?scheme=CAS",{ waitUntil:'networkidle2'});
 	await page.$eval('input[id=username]',(el:HTMLInputElement)=> el.value = '40017583');
@@ -25,10 +31,7 @@ const exepath:string = "C:\\Users\\Mpc\\AppData\\Local\\Chromium\\Application\\c
 	await page.close()
 })()
 async function getCoockiesYekta(){
-	const browser = await puppeteer.launch({
-		executablePath: exepath,
-		timeout:0,
-	});
+	const browser = await puppeteer.launch(config);
 	const page= await browser.newPage();
 	await page.goto("https://webauth.iut.ac.ir/cas/login?service=https%3A%2F%2Fyekta.iut.ac.ir%2Flogin%2Findex.php%3FauthCASattras%3DCASattras",{ waitUntil:'networkidle2'});
 	await page.$eval('input[id=username]',(el:HTMLInputElement)=> el.value = '40017583');
@@ -37,7 +40,6 @@ async function getCoockiesYekta(){
 	await sleep(5000)
 	const coockies = await page.cookies();
 	let  NameAndValue = coockies.map((cookie:any) => `${cookie.name}=${cookie.value}`).join('; ');
-	console.log(NameAndValue)
 	await getLinks(NameAndValue)
 	await page.close()
 }
@@ -204,6 +206,7 @@ async function getMenu(cookies:string){
 }
 async function reserveLaunch(cookies:string,food:Pokedex[])
 {
+	console.log(food[1].Meals[1].FoodMenu[0]);
 	for(let i=0;i<7;i++)
 	{
 		let x =1;
@@ -215,23 +218,23 @@ async function reserveLaunch(cookies:string,food:Pokedex[])
 			"Id":"${food[i].Meals[1].Id}",
 			"Date":"${food[i].Meals[1].Date}",
 			"MealId":"${food[i].Meals[1].MealId}",
-			"FoodId":"${food[i].Meals[1].FoodMenu[x].FoodId}",
-			"FoodName":"${food[i].Meals[1].FoodMenu[x].FoodName}",
-			"SelfId":"${food[i].Meals[1].FoodMenu[x].SelfMenu[0].SelfId}",
+			"FoodId":"${food[i].Meals[1].FoodMenu[0].FoodId}",
+			"FoodName":"${food[i].Meals[1].FoodMenu[0].FoodName}",
+			"SelfId":"${food[i].Meals[1].FoodMenu[0].SelfMenu[0].SelfId}",
 			"LastCounts":0,
 			"Counts":1,
-			"Price":"${food[i].Meals[1].FoodMenu[x].SelfMenu[0].Price}",
+			"Price":"${food[i].Meals[1].FoodMenu[0].SelfMenu[0].Price}",
 			"SobsidPrice":0,
 			"PriceType":2,
 			"State":0,
-			"Type":"${food[i].Meals[1].FoodMenu[x].FoodType}",
+			"Type":"${food[i].Meals[1].FoodMenu[0].FoodType}",
 			"OP":1,
 			"OpCategory":1,
 			"Provider":1,
 			"Saved":0,
 			"MealName":"${food[i].Meals[1].MealName}",
 			"DayName":"${food[i].Meals[1].DayName}",
-			"SelfName":"${food[i].Meals[1].FoodMenu[x].SelfMenu[0].SelfName}",
+			"SelfName":"${food[i].Meals[1].FoodMenu[0].SelfMenu[0].SelfName}",
 			"DayIndex":"${i}",
 			"MealIndex":0}]`;
 		body = JSON.stringify(JSON.parse(body), null, 0);
