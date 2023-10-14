@@ -19,35 +19,15 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
       # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with: 
+        node-version: "14.x"
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
+    - name: Install dependencies
+      run: npm install
 
-      - name: chmod
-        run: chmod +x chromedriver
-      - name: chrome
-        run: sudo apt-get install -y chromium-browser 
-      - name: Install pipenv
-        run: |
-          python -m pip install --upgrade pipenv wheel
-      - id: cache-pipenv
-        uses: actions/cache@v1
-        with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
-
-      - name: Install dependencies
-        if: steps.cache-pipenv.outputs.cache-hit != 'true'
-        run: |
-          pipenv install --deploy --dev
-
-      - name: Main
-        run: |
-          pipenv run python main.py ${{ secrets.IUT_UNAME }} ${{ secrets.IUT_PASS }}
-
+    - name: Run test
+      run: npm run start
