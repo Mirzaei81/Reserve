@@ -32,7 +32,7 @@ jobs:
       run: sudo apt-get install chromium-browser
 
     - name: Set environment variable
-        run: echo "CHROME_PATH=$(which google-chrome)" >> $GITHUB_ENV
+      run: echo "CHROME_PATH=$(which google-chrome)" >> $GITHUB_ENV
 
     - name: RunApp
       run: npm run start 
