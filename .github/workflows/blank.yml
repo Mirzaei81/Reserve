@@ -7,14 +7,18 @@ on:
    schedule: 
     - cron: '0 0 * * 2'
 jobs:
+
   deploy:
+
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     runs-on: ubuntu-latest
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Install
-      uses: ianwalter/puppeteer@v2.0.0
-      with:
-          args: npm
+
     - uses: actions/checkout@v2
       with:
             persist-credentials: false
@@ -26,6 +30,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Install Chromium
+      run: sudo apt-get install chromium-browser
 
-    - name: Run test
-      run: npm run start
+    - name: Set environment variable
+        run: echo "CHROME_PATH=$(which google-chrome)" >> $GITHUB_ENV
+
+    - name: RunApp
+      run: npm run start 

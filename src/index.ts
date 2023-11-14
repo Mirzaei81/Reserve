@@ -1,23 +1,24 @@
 import {Pokedex} from './foodType'
+import { jozveLinks} from './links';
 const fetch = require('node-fetch');
 const moment = require('jalali-moment');
 const puppeteer = require("puppeteer-core");
 const cheerio = require('cheerio');
+import * as fs from  "fs" ;
+let breakfest = [2,2,2,2,2]
+let launch = [1,0,0,0,0]
+let diner = [3,3,4,3,4]
 interface IConfig{
 	executablePath:string|null;
 }
+
 function sleep(ms:number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-let config= {
-	executablePath:"C:\\Users\\Mpc\\AppData\\Local\\Chromium\\Application\\chrome.exe"
+let config={
+	executablePath:process.env.CHROME_PATH,
 }as IConfig
-
 (async() => {
-	if(process.env.Dev){
-		config.executablePath = null
-	}
 	const browser = await puppeteer.launch(config);
 	const page= await browser.newPage();
 	await page.goto("https://dining.iut.ac.ir/Cas/Login/?scheme=CAS",{ waitUntil:'networkidle2'});
@@ -29,7 +30,7 @@ let config= {
 	let  NameAndValue = coockies.map((cookie:any) => `${cookie.name}=${cookie.value}`).join('; ');
 	await getMenu(NameAndValue);
 	await page.close()
-})()
+})();
 async function getCoockiesYekta(){
 	const browser = await puppeteer.launch(config);
 	const page= await browser.newPage();
@@ -44,136 +45,13 @@ async function getCoockiesYekta(){
 	await page.close()
 }
 
-const Videolinks = 
-	[
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=333894',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=333895',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=333896',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=334785',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=334787',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=336253',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=336254',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=336261',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=336262',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=338640',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=338641',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=338642',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=338643',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=338645',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=338646',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=339560',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=339562',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=339563',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=339564',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=340953',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=340954',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=340955',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=340956',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=340957',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343572',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343573',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343574',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343575',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343576',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343577',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=343578',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=344595',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=344596',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=344597',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=345218',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=345219',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=345220',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=345221',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=345222',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=347619',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=347620',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=347621',
-		'https://yekta.iut.ac.ir/mod/url/view.php?id=348080']
-
-const jozveLinks =[
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333890',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333891',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333892',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333903',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333905',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333908',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=333909',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=334777',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=334781',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=334782',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=334783',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=334784',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=334786',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336249',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336250',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336251',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336252',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336259',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336260',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336743',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=336744',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338624',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338625',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338628',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338629',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338631',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338632',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338637',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338638',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=338639',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339553',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339554',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339555',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339556',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339557',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339558',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=339559',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340124',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340125',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340948',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340949',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340950',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340951',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=340952',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343565',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343568',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343569',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343570',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343571',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343579',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343580',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343670',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343671',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343672',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343673',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=343674',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=344592',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=344593',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=344594',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345161',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345210',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345211',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345212',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345214',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345215',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345216',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345223',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345897',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=345902',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=347616',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=347617',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=347618',
-	'https://yekta.iut.ac.ir/mod/resource/view.php?id=348079'];
-
 async function getLinks(cookies:string){
 	const xsrf_token:string = "11TmdkoHT2b_ju2ve6UkGLqVcZVZtlBe4vUiwBqAF1qHX_yCqiyDiOfr9UUTU5d3CG7oXOiSLg0LwAJqjZ2dzUG2U-FpRkZpdqVhPHOY4X0fIRNBssMJJc02aALGhqPQd6odvg2";
-	for (const VideoLink of jozveLinks){
-	const response = await fetch(VideoLink,
+	const response = await fetch('https://yekta.iut.ac.ir/mod/assign/view.php?id=195738',
 	{
 		"headers": {
 			"cookie":cookies,
 			"x-xsrf-token": xsrf_token,
-			"Referer": "https://dining.iut.ac.ir/",
 		},
 		"method": "GET"
 		}
@@ -182,15 +60,22 @@ async function getLinks(cookies:string){
 	const $ = cheerio.load(html);
 	const link = $('div.urlworkaround a').attr('href');
 	console.log(link);
-	}
 	console.log("-------------END----------------------")
 }
 async function getMenu(cookies:string){
-	let day = moment().locale('fa').format("DD");
+	let day = moment().locale('fa').format("DD")-3;
 	let month = moment().locale('fa').format("MM");
-	console.log(`day : ${day} month:${month}`)
-	const xsrf_token:string = "11TmdkoHT2b_ju2ve6UkGLqVcZVZtlBe4vUiwBqAF1qHX_yCqiyDiOfr9UUTU5d3CG7oXOiSLg0LwAJqjZ2dzUG2U-FpRkZpdqVhPHOY4X0fIRNBssMJJc02aALGhqPQd6odvg2";
-	const response = await fetch(`https://dining.iut.ac.ir/api/v0/Reservation?lastdate=1402%2F${month}%2F${day-6}&navigation=7`, {
+	if(day<0){
+		month-=1
+		day=29
+	}
+	let paddedNumber = day.toString().padStart(2, '0');
+
+	console.log(`day : ${paddedNumber} month : ${month}`)
+	const xsrf_token:string =
+	"11TmdkoHT2b_ju2ve6UkGLqVcZVZtlBe4vUiwBqAF1qHX_yCqiyDiOfr9UUTU5d3CG7oXOiSLg0LwAJqjZ2dzUG2U-FpRkZpdqVhPHOY4X0fIRNBssMJJc02aALGhqPQd6odvg2";
+
+	const response = await fetch(`https://dining.iut.ac.ir/api/v0/Reservation?lastdate=1402%2F${month}%2F${paddedNumber}&navigation=7`, {
 		"headers": {
 			"accept": "application/json, text/plain, */*",
 			"cookie":cookies,
@@ -200,6 +85,8 @@ async function getMenu(cookies:string){
 		"method": "GET"
 	});
 	const res = await response.json();
+	fs.writeFileSync("./menu.json",JSON.stringify(res))
+	console.log(res)
 	await reserveLaunch(cookies,await res);
 	await reserveDinner(cookies,await res);
 	await reserveBreakfest(cookies,await res);
@@ -207,11 +94,10 @@ async function getMenu(cookies:string){
 async function reserveLaunch(cookies:string,food:Pokedex[])
 {
 	console.log(food[1].Meals[1].FoodMenu[0]);
-	for(let i=0;i<7;i++)
+	console.log(food);
+	for(let i=0;i<5;i++)
 	{
-		let x =1;
-		if(i<5){x=1}
-		else{x=0}
+		let x =launch[i];
 		let body = `[
 			{
 			"Row":4,
@@ -264,7 +150,7 @@ async function reserveDinner(cookies:string,food:Pokedex[])
 {
 	for(let i=0;i<5;i++)
 	{
-		let x =2;
+		let x =diner[i];
 		let body = `[
 			{
 			"Row":4,
@@ -318,7 +204,7 @@ async function reserveBreakfest(cookies:string,food:Pokedex[])
 {
 	for(let i=1;i<5;i++)
 	{
-		let x =1;
+		let x =breakfest[i];
 		let body = `[
 			{
 			"Row":4,
