@@ -17,7 +17,12 @@ jobs:
       # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Get current working directory
-      run: pwd
+      run: |
+       echo "Files in current directory:"
+       ls
+       echo "Files in parent directory:"
+       ls ..
+      
     - uses: browser-actions/setup-chrome@v1
     - run: chrome --version
     - name: Use Node.js
